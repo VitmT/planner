@@ -28,7 +28,9 @@ class EventOccurenceFormType extends AbstractType
             ->add('misto')
         ;
         $builder
-            ->add('ulozit', SubmitType::class)
+            ->add('ulozit', SubmitType::class, [
+                'attr' => ['class' => 'save btn btn-success'],
+            ]);
         ;
     }
 
