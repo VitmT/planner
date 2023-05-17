@@ -16,7 +16,7 @@ class LoginType extends AbstractType
             ->add('Name:')
         ;
         $builder->add('Password:', PasswordType::class);
-        $builder->add('save', SubmitType::class, [
+        $builder->add('Login', SubmitType::class, [
             'attr' => ['class' => 'save loginButton btn btn-success'],
         ]);
     }
