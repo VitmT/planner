@@ -2,11 +2,50 @@
 
 {% block title %}RecurringEventList{% endblock %}
 {% block body %}
-    <div class="main-box">
-        <div class="event">
-            <div class="title">Title</div>
-            <div class="time">11:00</div>
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5">
+                <div class="d-grid gap-2">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <th scope="col">ID</th>
+                            <th scope="col">Place</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">0</th>
+                                <td>Stará Role</td>
+                                <td>15.6.2022</td>
+                                <td>8:30</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Nové Sedlo</td>
+                                <td>15.7.2022</td>
+                                <td>8:30</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Chodov</td>
+                                <td>15.8.2022</td>
+                                <td>8:30</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Ostrov</td>
+                                <td>15.9.2022</td>
+                                <td>8:30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button name="submit" type="submit" class="p-3">Edit event</button>
+                </div>
+            </div>
         </div>
-        <button name="submit" type="submit">Edit event</button>
     </div>
+</div>
+        
 {% endblock %}
