@@ -1,5 +1,17 @@
+body{
+    margin: 0 auto;
+}
+
 .loginButton {
     display: block !important;
     margin: 3% auto !important;
     width: 200px !important;
+}
+
+.main-box{
+    margin: 2em auto;
+    width: 60vw;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
 }
