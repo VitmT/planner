@@ -6,4 +6,15 @@ div#prepinac, div#prepinac-zpet {text-align: center; visibility: hidden;}
 div#prepinac a, div#prepinac-zpet a {color: inherit; text-decoration: underline;}
 video.sloupek {margin: auto; cursor: pointer;}
 .sloupek-kontejner {display: none; text-align: center;}
-
+div.mainbox{
+    margin: auto;
+    display: block;
+}
+div.event{
+    margin:auto;
+    display: block;
+}
+div.time{
+    margin: auto;
+    display: block;
+}
