@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="body">
+        <div class="header">
+            <h2>Formular pro vytvoreni nove udalosti<h2>
+        </div>
+        <div class="Pole">
+            <fieldset>
+                <div class="Buttons">
+                    <form>
+                        <label for="Date">Datum</label><br>
+                        <input type="text" id="Date" name="Date"><br>
+                        <label for="Time">Cas</label><br>
+                        <input type="text" id="Time" name="Time"><br>
+                        <label for="Place">Misto</label><br>
+                        <input type="text" id="Misto" name="Misto"><br><br>
+                        <input type="submit" value="Ulozit udalost"><br>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}
+
+
