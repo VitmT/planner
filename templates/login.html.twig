@@ -1,8 +1,16 @@
 {% extends "base.html.twig" %}
 {% block  body %}
-<div class="mainbox">
-    <div class="form">
-       {{ form(form) }}
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5">
+                <div class="form-data">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        {{ form(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
