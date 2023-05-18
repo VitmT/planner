@@ -33,7 +33,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/{path}", name="main", requirements={"path"=".*"})
+     * @Route("/{path}", name="main", requirements={"path"=".*"}, priority=-1)
      */
     public function index(string $path, Request $request): Response
     {
