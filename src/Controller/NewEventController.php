@@ -9,9 +9,7 @@ use App\Form\EventOccurenceFormType;
 
 class NewEventController extends AbstractController
 {
-    /**
-     * @Route("/new-eventt", name="new-event")
-     */
+    #[Route('/new-event', name: 'new-event')]
     public function Login(): Response
     {
         return $this->render('EventOccurenceForm.html.twig', [
