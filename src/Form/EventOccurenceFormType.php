@@ -26,17 +26,17 @@ class EventOccurenceFormType extends AbstractType
             ->add('eventStart', TimeType::class, [
                 'attr' => ['class' => 'save dateSelect form-control'],
             ]);
-            $builder->add('Duration', DateIntervalType::class, [
-                'widget'      => 'choice',
-               'with_years'  => false,
-                'with_months' => false,
-                'with_days' => false,
-                'with_minutes'   => true,
-                'with_hours'  => true,
-                'attr' => ['class' => 'save dateSelect'],
-                'minutes' => [0 => 0, 15 => 15, 30 => 30, 45 => 45],
-                'hours' => array_combine(range(0, 5), range(0, 5)),
-            ]);
+        $builder->add('Duration', DateIntervalType::class, [
+            'widget'      => 'choice',
+            'with_years'  => false,
+            'with_months' => false,
+            'with_days' => false,
+            'with_minutes'   => true,
+            'with_hours'  => true,
+            'attr' => ['class' => 'save dateSelect'],
+            'minutes' => [0 => 0, 15 => 15, 30 => 30, 45 => 45],
+            'hours' => array_combine(range(0, 5), range(0, 5)),
+        ]);
         $builder
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'save loginButton btn btn-success w-100'],
