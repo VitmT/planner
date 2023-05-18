@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Vývojové prostředí pro PVA{% endblock %}</title>
+        <title>{% block title %}Planner{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -14,6 +14,7 @@
         {% endblock %}
     </head>
     <body>
+        <header><h2 class="text-center mt-5">Event planner</h2></header>
         {% block body %}{% endblock %}
     </body>
 </html>
