@@ -8,6 +8,46 @@ body{
     width: 200px !important;
 }
 
-.dateSelect {
-    
+#event_occurence_form_eventDate_month {
+    height: 50px;
+    width: 75px;
+    text-align: center;
+}
+
+#event_occurence_form_eventDate_day {
+    width: 75px;
+    text-align: center;
+}
+
+#event_occurence_form_eventDate_year {
+    width: 75px;
+    text-align: center;
+}
+
+#event_occurence_form_eventStart_hour {
+    height: 50px;
+    width: 100px;
+    text-align: center;
+}
+
+#event_occurence_form_eventStart_minute {
+    height: 50px;
+    width: 100px;
+    text-align: center;
+}
+
+#event_occurence_form_Duration_hours {
+    height: 50px;
+    width: 100px;
+    text-align: center;
+}
+
+#event_occurence_form_Duration_minutes {
+    height: 50px;
+    width: 100px;
+    text-align: center;
+}
+
+.required {
+    font-weight: 800;
 }

@@ -20,11 +20,11 @@ class EventOccurenceFormType extends AbstractType
             ]);
         $builder
             ->add('eventDate', DateType::class, [
-                'attr' => ['class' => 'save dateSelect form-control'],
+                'attr' => ['class' => 'save form-control d-flex justify-content-center'],
             ]);
         $builder
             ->add('eventStart', TimeType::class, [
-                'attr' => ['class' => 'save dateSelect form-control'],
+                'attr' => ['class' => 'save form-control d-flex justify-content-center'],
             ]);
         $builder->add('Duration', DateIntervalType::class, [
             'widget'      => 'choice',
@@ -33,7 +33,7 @@ class EventOccurenceFormType extends AbstractType
             'with_days' => false,
             'with_minutes'   => true,
             'with_hours'  => true,
-            'attr' => ['class' => 'save dateSelect'],
+            'attr' => ['class' => 'save form-control d-flex justify-content-center text-center'],
             'minutes' => [0 => 0, 15 => 15, 30 => 30, 45 => 45],
             'hours' => array_combine(range(0, 5), range(0, 5)),
         ]);
