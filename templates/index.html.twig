@@ -9,7 +9,6 @@
                     <a type="submit" name="submitAdd" class="p-3 btn btn-success" href="#">Add Event</a>
                     <table class="table table-striped">
                         <thead class="table-dark">
-                            <th scope="col">ID</th>
                             <th scope="col">Place</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
@@ -19,7 +18,6 @@
                         
                         {% for event in events %}
                             <tr>
-                                <td>{{ event.editLink }}</td>
                                 <td>{{ event.place }}</td>
                                 <td>{{ event.date }}</td>
                                 <td>{{ event.time }}</td>
