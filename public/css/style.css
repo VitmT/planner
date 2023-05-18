@@ -1,5 +1,13 @@
+body{
+    margin: 0 auto;
+}
+
 .loginButton {
     display: block !important;
     margin: 3% auto !important;
     width: 200px !important;
+}
+
+.dateSelect {
+    
 }

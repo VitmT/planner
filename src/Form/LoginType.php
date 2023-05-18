@@ -7,17 +7,20 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class LoginType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('Name:')
-        ;
-        $builder->add('Password:', PasswordType::class);
+        $builder->add('Name:', TextType::class, [
+                'attr' => ['class' => 'form-control']
+        ]);
+        $builder->add('Password:', PasswordType::class, [
+                'attr' => ['class' => 'form-control']
+        ]);
         $builder->add('Login', SubmitType::class, [
-            'attr' => ['class' => 'save loginButton btn btn-success'],
+            'attr' => ['class' => 'save loginButton btn btn-success w-100'],
         ]);
     }
 

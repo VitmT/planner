@@ -14,22 +14,26 @@ class EventOccurenceFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('jmenoUdalosti')
+            ->add('eventName')
         ;
         $builder
-            ->add('datum',  DateType::class)
-        ;
+            ->add('eventDate', DateType::class, [
+                'attr' => ['class' => 'save dateSelect'],
+            ]);
         $builder
-            ->add('zacatek', TimeType::class)
-        ;
+            ->add('eventStart', TimeType::class, [
+                'attr' => ['class' => 'save dateSelect'],
+            ]);
         $builder
-            ->add('konec', TimeType::class)
-        ;
+            ->add('eventEnd', TimeType::class, [
+                'attr' => ['class' => 'save dateSelect'],
+            ]);
         $builder
-            ->add('misto')
-        ;
+            ->add('eventPlace');
         $builder
-            ->add('ulozit', SubmitType::class)
+            ->add('save', SubmitType::class, [
+                'attr' => ['class' => 'save btn btn-success'],
+            ]);
         ;
     }
 
