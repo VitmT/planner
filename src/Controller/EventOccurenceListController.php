@@ -14,5 +14,6 @@ class EventOccurenceListController extends AbstractController
         return $this->render('EventOccurenceList.html.twig',[
             
         ]);
+        
     }
 }

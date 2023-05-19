@@ -15,5 +15,6 @@ class NewEventController extends AbstractController
         return $this->render('EventOccurenceForm.html.twig', [
             "form" => $this->createForm(EventOccurenceFormType::class,[]),
         ]);
+        
     }
 }
