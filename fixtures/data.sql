@@ -41,7 +41,9 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[]','dykpassword'),(3,'dominik','[]','$2y$13$j1VJm2Cl/6c7g7PJ2ZACx.Q2z48/u3Y9B1cFSlWAj9i3XuXHjLPZi ');
+
+INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[]','$2y$13$wuIsvuu9bf5qXdNSJP2tWOGy.V0caO3h5aiJJJhU6pdSY077eqEU6'),(2,'vitek','[]','$2y$13$I32l6kNVLiLPCmDMNCeaR.eO1qE0cHFgW/cLSI5XLpQd54WZWdDrG');
+
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
