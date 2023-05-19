@@ -17,7 +17,8 @@ $(document).ready(function(){
         dropdown: true,
         scrollbar: true,
         minTime: '00:00',
-        maxTime: '05:00'
+        maxTime: '05:00',
+        defaultTime: '0'
     });
 
 })
