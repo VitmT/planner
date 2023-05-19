@@ -1,47 +1,32 @@
 {% extends "base.html.twig" %}
 
-{% block title %}RecurringEventList{% endblock %}
 {% block body %}
-<div class="container mt-5">
+<div class="container mt-5 justify-content-center">
     <div class="row d-flex justify-content-center">
-        <div class="col-md-6">
-            <div class="card px-5 py-5">
+        <div class="col-md-6 justify-content-center">
+            <div class="card px-3 py-3 justify-content-center">
                 <div class="d-grid gap-2">
+                    <a type="submit" name="submitAdd" class="p-3 btn btn-success" href="#">Add Event</a>
                     <table class="table table-striped">
                         <thead class="table-dark">
-                            <th scope="col">ID</th>
                             <th scope="col">Place</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
+                            <th></th>
                         </thead>
                         <tbody>
+                        
+                        {% for event in events %}
                             <tr>
-                                <th scope="row">0</th>
-                                <td>Stará Role</td>
-                                <td>15.6.2022</td>
-                                <td>8:30</td>
+                                <td>{{ event.place }}</td>
+                                <td>{{ event.date }}</td>
+                                <td>{{ event.time }}</td>
+                                <td><a type="submit" class="p-1 btn btn-success bi bi-pen" value="Edit Event"></a></td> 
                             </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Nové Sedlo</td>
-                                <td>15.7.2022</td>
-                                <td>8:30</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Chodov</td>
-                                <td>15.8.2022</td>
-                                <td>8:30</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Ostrov</td>
-                                <td>15.9.2022</td>
-                                <td>8:30</td>
-                            </tr>
+                        {% endfor %}
+
                         </tbody>
                     </table>
-                    <button name="submit" type="submit" class="p-3 btn btn-success">Edit event</button>
                 </div>
             </div>
         </div>
