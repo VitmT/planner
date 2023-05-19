@@ -16,6 +16,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Dumping data for table `reccuring_event`
+--
+
+LOCK TABLES `reccuring_event` WRITE;
+/*!40000 ALTER TABLE `reccuring_event` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reccuring_event` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `reccuring_event_occurence`
+--
+
+LOCK TABLES `reccuring_event_occurence` WRITE;
+/*!40000 ALTER TABLE `reccuring_event_occurence` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reccuring_event_occurence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `user`
 --
 
@@ -23,6 +41,15 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[]','dykpassword');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `user_reccuring_event`
+--
+
+LOCK TABLES `user_reccuring_event` WRITE;
+/*!40000 ALTER TABLE `user_reccuring_event` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_reccuring_event` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -34,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-18 13:16:56
+-- Dump completed on 2023-05-19  8:01:22
