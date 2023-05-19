@@ -13,11 +13,18 @@ class LoginType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('Name:', TextType::class, [
-                'attr' => ['class' => 'form-control']
+        $builder->add('username', TextType::class, [
+            'label' => 'Name:',    
+            'attr' => [
+                    'class' => 'form-control',
+                    'name' => 'username', 
+                ],
         ]);
-        $builder->add('Password:', PasswordType::class, [
-                'attr' => ['class' => 'form-control']
+        $builder->add('password', PasswordType::class, [
+                'label' => 'Password:', 
+                'attr' => [
+                    'class' => 'form-control',
+                ]
         ]);
         $builder->add('Login', SubmitType::class, [
             'attr' => ['class' => 'save loginButton btn btn-success w-100 mt-3'],
