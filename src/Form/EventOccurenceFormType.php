@@ -1,6 +1,7 @@
 <?php
 namespace App\Form;
 
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,26 +17,37 @@ class EventOccurenceFormType extends AbstractType
     {
         $builder
             ->add('eventName', TextType::class, [
-            'attr' => ['class' => 'save form-control'],
+            'attr' => ['class' => 'save form-control mb-3'],
             ]);
         $builder
             ->add('eventDate', DateType::class, [
-                'attr' => ['class' => 'save form-control d-flex justify-content-center'],
+                'attr' => [
+                    'class' => 'save form-control d-flex justify-content-center mb-3',
+                ],
+                'widget' => 'single_text',
+                'data' => new \DateTime(),
             ]);
         $builder
             ->add('eventStart', TimeType::class, [
-                'attr' => ['class' => 'save form-control d-flex justify-content-center'],
+                'attr' => [
+                    'class' => 'save form-control d-flex justify-content-center text-center mb-3 timepicker',
+                ],
+                'widget' => 'single_text',
             ]);
         $builder->add('Duration', DateIntervalType::class, [
-            'widget'      => 'choice',
             'with_years'  => false,
             'with_months' => false,
             'with_days' => false,
             'with_minutes'   => true,
             'with_hours'  => true,
-            'attr' => ['class' => 'save form-control d-flex justify-content-center text-center'],
+            'attr' => [
+                'class' => 'save form-control d-flex justify-content-center text-center mb-3 timepicker2',
+            ],
+            'widget' => 'single_text',
+            /*
             'minutes' => [0 => 0, 15 => 15, 30 => 30, 45 => 45],
-            'hours' => array_combine(range(0, 5), range(0, 5)),
+-           'hours' => array_combine(range(0, 5), range(0, 5)),
+            */
         ]);
         $builder
             ->add('save', SubmitType::class, [
