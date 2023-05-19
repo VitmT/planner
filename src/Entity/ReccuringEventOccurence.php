@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\ReccuringEventOccurenceRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: ReccuringEventOccurenceRepository::class)]
+class ReccuringEventOccurence
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $timestamp = null;
+
+    #[ORM\Column]
+    private ?int $duration = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reccuringEventOccurences')]
+    private ?ReccuringEvent $reccuringEvent = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTimestamp(): ?\DateTimeInterface
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(\DateTimeInterface $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): self
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getReccuringEvent(): ?ReccuringEvent
+    {
+        return $this->reccuringEvent;
+    }
+
+    public function setReccuringEvent(?ReccuringEvent $reccuringEvent): self
+    {
+        $this->reccuringEvent = $reccuringEvent;
+
+        return $this;
+    }
+}
