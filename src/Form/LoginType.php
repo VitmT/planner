@@ -20,7 +20,7 @@ class LoginType extends AbstractType
                 'attr' => ['class' => 'form-control']
         ]);
         $builder->add('Login', SubmitType::class, [
-            'attr' => ['class' => 'save loginButton btn btn-success w-100'],
+            'attr' => ['class' => 'save loginButton btn btn-success w-100 mt-3'],
         ]);
     }
 
