@@ -39,7 +39,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[]','dykpassword');
+INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[]','$2y$13$wuIsvuu9bf5qXdNSJP2tWOGy.V0caO3h5aiJJJhU6pdSY077eqEU6'),(2,'vitek','[]','$2y$13$I32l6kNVLiLPCmDMNCeaR.eO1qE0cHFgW/cLSI5XLpQd54WZWdDrG');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19  8:01:22
+-- Dump completed on 2023-05-19 10:15:45
