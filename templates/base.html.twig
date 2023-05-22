@@ -25,7 +25,17 @@
         {% endblock %}
     </head>
     <body>
-        <header><h1 class="text-center mt-5">Event planner</h1></header>
+        <header>
+            <h1 class="text-center mt-5">Event planner</h1>
+            <div class="user-box">
+                {% if app.user %}
+                    <p>
+                        <i class="bi bi-person-fill"></i>{{ app.user.username }}
+                    </p>
+                {% endif %}
+            </div>
+
+        </header>
         {% block logout %}{% endblock %}
         {% block body %}{% endblock %}
     </body>
