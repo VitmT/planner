@@ -12,16 +12,17 @@ class ReccuringEventOccurence
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $timestamp = null;
+    private \DateTimeInterface $timestamp;
 
     #[ORM\Column]
-    private ?int $duration = null;
+    private int $duration;
 
     #[ORM\ManyToOne(inversedBy: 'reccuringEventOccurences')]
-    private ?ReccuringEvent $reccuringEvent = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ReccuringEvent $reccuringEvent;
 
     public function getId(): ?int
     {

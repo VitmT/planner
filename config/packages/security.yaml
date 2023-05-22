@@ -26,7 +26,6 @@ security:
                 check_path: login
                 username_parameter: "login[username]"
                 password_parameter: "login[password]"
-                default_target_path: app_index
             logout:
                 path: logout
                 target: login
