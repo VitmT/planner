@@ -19,11 +19,10 @@ class LoginController extends AbstractController
         if ($form->isSubmitted()) {
             
         }
-        if ($user !== null) {
-
+        
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_index'); 
         }
-
-       # return $this->redirectToRoute("app_index");
 
         return $this->render('login.html.twig', [
             "form" => $form,
