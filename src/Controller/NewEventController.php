@@ -14,6 +14,12 @@ class NewEventController extends AbstractController
     {
         return $this->render('EventOccurenceForm.html.twig', [
             "form" => $this->createForm(EventOccurenceFormType::class,[]),
+            "reccuringEventOccurences"=>[
+                ["editLink" => "#", "name" => "Nové Sedlo"],
+                ["editLink" => "#", "name" => "Chodov"],
+                ["editLink" => "#", "name" => "Ostrov"],
+                ["editLink" => "#", "name" => "Stará Role"],
+            ],
         ]);
 
     }

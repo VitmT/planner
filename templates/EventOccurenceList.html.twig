@@ -8,10 +8,9 @@
                 <div class="form-data">
                     <div class="d-grid gap-2">
                       <div class="list-group text-center">
-                        <a href="#" class="list-group-item list-group-item-action"> Nové sedlo</a>
-                        <a href="#" class="list-group-item list-group-item-action">Ostrov</a>
-                        <a href="#" class="list-group-item list-group-item-action">Podbořany</a>
-                        <a href="#" class="list-group-item list-group-item-action">Nejdek</a>
+                        {% for reccuringEventOccurence in reccuringEventOccurences %}
+                            <a href="#" class="list-group-item list-group-item-action">{{reccuringEventOccurence.place}}</a>
+                        {% endfor %}
                       </div>
                     </div>
                 </div>
