@@ -19,7 +19,7 @@
                             <tr>
                                 <td>{{ occurence.reccuringEvent.name }}</td>
                                 <td>{{ occurence.timestamp|date("m/d/Y") }}</td>
-                                <td><a type="submit" class="p-1 btn btn-success bi bi-pen" value="Edit Event"></a></td> 
+                                <td><a href="{{ path('edit-event', {id: occurence.id}) }}" type="submit" class="p-1 btn btn-success bi bi-pen" value="Edit Event"></a></td> 
                             </tr>
                         {% endfor %}
 
