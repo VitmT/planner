@@ -8,8 +8,8 @@
                 <div class="form-data">
                     <div class="d-grid gap-2">
                       <div class="list-group text-center">
-                        {% for reccuringEventOccurence in reccuringEventOccurences %}
-                            <a href="#" class="list-group-item list-group-item-action">{{reccuringEventOccurence.place}}</a>
+                        {% for event in events %}
+                            <a href="#" class="list-group-item list-group-item-action">{{event.name}}</a>
                         {% endfor %}
                       </div>
                     </div>
