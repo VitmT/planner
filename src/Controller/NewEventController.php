@@ -8,6 +8,7 @@ use App\Form\EventOccurenceFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
+use App\Entity\ReccuringEventOccurence;
 use App\Repository\ReccuringEventOccurenceRepository;
 use App\Repository\ReccuringEventRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -20,34 +21,6 @@ class NewEventController extends AbstractController
     ) {
     }
 
-    #[Route('/new-event', name: 'ushdfaish')]
-    public function login(?int $id, Request $request, EntityManagerInterface $entityManager): Response
-    {
-        if ($id === null) {
-            $recurringEventOccurence = new RecurringEventOccurence();
-        } else {
-            $recurringEventOccurence = $this->getRepository(RecurringEventOccurence::class)->find($id);
-        }
-        //$reccuringEventOccurence = [];//new ReccuringEvent();
-                
-        $form = $this->createForm(EventOccurenceFormType::class, $recurringEventOccurence);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reccuringEvent = $form->getData();
-            $reccuringEvent->setUser($this->getUser());
-            $entityManager->persist($reccuringEvent);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_index');
-        }
-
-        return $this->render('EventOccurenceForm.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
     #[Route('/new/{reccuringEventId}', name: 'new-event')]
     public function new(
         int $reccuringEventId,
@@ -55,8 +28,10 @@ class NewEventController extends AbstractController
     ): Response
     {
         $reccuringEvent = $reccuringEventRepository->find($reccuringEventId);
+        $reccuringEventOccurence = new ReccuringEventOccurence();
+        $reccuringEventOccurence->setReccuringEvent($reccuringEvent);
 
-        return $this->neco();
+        return $this->handleRequest($reccuringEventOccurence);
     }
 
     #[Route('/edit/{id}', name: 'edit-event')]
@@ -65,19 +40,20 @@ class NewEventController extends AbstractController
         ReccuringEventOccurenceRepository $reccuringEventOccurenceRepository
     ): Response
     {
-        $reccuringEventOccurence = $reccuringEventOccurenceRepository->find($id);
-        $reccuringEvent = $reccuringEventOccurence->getReccuringEvent();
-
-        return $this->neco();
+        return $this->handleRequest($reccuringEventOccurenceRepository->find($id));
     }
 
-    private function neco(): Response
+    private function handleRequest(RecurringEventOccurence $reccuringEventOccurence): Response
     {
         $request = $this->requestStack->getMainRequest();
-        $form = $this->createForm(EventOccurenceFormType::class);
+        $form = $this->createForm(EventOccurenceFormType::class, $reccuringEventOccurence);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reccuringEventOccurence = $form->getData();
+            $this->entityManager->persist($reccuringEventOccurence);
+            $this->entityManager->flush();
+
             return $this->redirectToRoute('app_index');
         }
 
