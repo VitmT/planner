@@ -1,17 +1,16 @@
 {% extends "adminbase.html.twig" %}
 {% block body %}
 <div class="container mt-5">
-<a class="btn btn-light back-button" href="{{path('app_index')}}" role="button">Zpět</a>
+<a class="btn btn-outline-dark position-absolute top-0 start-0 mt-2 ms-2" href="{{path('app_index')}}" role="button"><i class="bi bi-arrow-return-left"></i> &nbsp; Back</a>
     <div class="row d-flex justify-content-center">
         <div class="col-md-6">
             <div class="card px-5 py-5">
                 <div class="form-data">
                     <div class="d-grid gap-2">
                       <div class="list-group text-center">
-                        <a href="#" class="list-group-item list-group-item-action"> Nové sedlo</a>
-                        <a href="#" class="list-group-item list-group-item-action">Ostrov</a>
-                        <a href="#" class="list-group-item list-group-item-action">Podbořany</a>
-                        <a href="#" class="list-group-item list-group-item-action">Nejdek</a>
+                        {% for reccuringEventOccurence in reccuringEventOccurences %}
+                            <a href="#" class="list-group-item list-group-item-action">{{reccuringEventOccurence.place}}</a>
+                        {% endfor %}
                       </div>
                     </div>
                 </div>

@@ -12,7 +12,13 @@ class EventOccurenceListController extends AbstractController
     public function eventoccurencelist(): Response
     {
         return $this->render('EventOccurenceList.html.twig',[
-            
+            "reccuringEventOccurences"=>[
+                ["editLink" => "#", "place" => "Nové Sedlo"],
+                ["editLink" => "#", "place" => "Chodov"],
+                ["editLink" => "#", "place" => "Ostrov"],
+                ["editLink" => "#", "place" => "Stará Role"],
+            ],
+
         ]);
         
     }
