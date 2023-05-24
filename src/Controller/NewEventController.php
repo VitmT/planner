@@ -2,14 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\ReccuringEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\EventOccurenceFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
 
 class NewEventController extends AbstractController
@@ -24,7 +21,7 @@ class NewEventController extends AbstractController
         }
         //$reccuringEventOccurence = [];//new ReccuringEvent();
                 
-        $form = $this->createForm(EventOccurenceFormType::class, $recurringEventOccurence);
+        $form = $this->createForm(EventOccurenceFormType::class);
 
         $form->handleRequest($request);
 

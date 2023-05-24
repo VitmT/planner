@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ReccuringEventOccurenceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,16 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     #[Route('', name: 'app_index')]
-    public function index(): Response
+    public function index(ReccuringEventOccurenceRepository $reccuringEventOccurenceRepository): Response
     {
+        $reccuringEventOccurences = $reccuringEventOccurenceRepository->findAll();
+       // dd( $reccuringEventOccurences[0]->getReccuringEvent());
         return $this->render('index.html.twig',[
-            "events" => [
-                ["editLink" => "#", "place" => "Nové Sedlo", "date" => date('y.m.d h:i')],
-                ["editLink" => "#", "place" => "Chodov", "date" => date('y.m.d h:i')],
-                ["editLink" => "#", "place" => "Ostrov", "date" => date('y.m.d h:i')],
-                ["editLink" => "#", "place" => "Stará Role", "date" => date('y.m.d h:i')],
-                ["editLink" => "#", "place" => "Sokolov", "date" => date('y.m.d h:i')]
-            ],
+            "occurences" => $reccuringEventOccurences
         ]);
 
     }

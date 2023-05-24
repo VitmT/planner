@@ -16,7 +16,7 @@ class EventOccurenceFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('eventName', TextType::class, [
+            ->add('name', TextType::class, [
             'attr' => ['class' => 'save form-control mb-3'],
             ]);
         $builder
@@ -44,10 +44,6 @@ class EventOccurenceFormType extends AbstractType
                 'class' => 'save form-control d-flex justify-content-center text-center mb-3 timepicker2',
             ],
             'widget' => 'single_text',
-            /*
-            'minutes' => [0 => 0, 15 => 15, 30 => 30, 45 => 45],
--           'hours' => array_combine(range(0, 5), range(0, 5)),
-            */
         ]);
         $builder
             ->add('save', SubmitType::class, [
@@ -59,7 +55,7 @@ class EventOccurenceFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => ReccuringEventOccurences::class
         ]);
     }
 }
