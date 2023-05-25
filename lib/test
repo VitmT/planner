@@ -13,5 +13,5 @@ $now = new DateTimeImmutable();
 $lastEventTimestamp = new DateTimeImmutable("2023-05-27 8:00");
 
 $timestamp = $recurrence->getNextTimestamp($baseTimestamp, $now, $lastEventTimestamp);
-
+$timestamp = $recurrence->getNextTimestamp($baseTimestamp, $now, $lastEventTimestamp);
 var_dump($timestamp);
