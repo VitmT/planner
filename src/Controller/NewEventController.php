@@ -15,12 +15,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class NewEventController extends AbstractController
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-        private RequestStack $requestStack
-    ) {
-    }
-
     #[Route('/new/{recurringEvent}', name: 'new-event')]
     #[Route('/edit/{occurence}', name: 'edit-event')]
     public function edit(
