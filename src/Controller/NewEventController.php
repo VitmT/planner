@@ -8,7 +8,7 @@ use App\Form\EventOccurenceFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
-use App\Entity\ReccuringEventOccurence;
+use App\Entity\ReccuringEvent as RecurringEvent;
 use App\Repository\ReccuringEventOccurenceRepository;
 use App\Repository\ReccuringEventRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -21,37 +21,25 @@ class NewEventController extends AbstractController
     ) {
     }
 
-    #[Route('/new/{reccuringEventId}', name: 'new-event')]
-    public function new(
-        int $reccuringEventId,
-        ReccuringEventRepository $reccuringEventRepository
-    ): Response
-    {
-        $reccuringEvent = $reccuringEventRepository->find($reccuringEventId);
-        $reccuringEventOccurence = new ReccuringEventOccurence();
-        $reccuringEventOccurence->setReccuringEvent($reccuringEvent);
-
-        return $this->handleRequest($reccuringEventOccurence);
-    }
-
-    #[Route('/edit/{id}', name: 'edit-event')]
+    #[Route('/new/{recurringEvent}', name: 'new-event')]
+    #[Route('/edit/{occurence}', name: 'edit-event')]
     public function edit(
-        int $id,
-        ReccuringEventOccurenceRepository $reccuringEventOccurenceRepository
+        ?RecurringEvent $recurringEvent,
+        ?RecurringEventOccurence $occurence,
+        Request $request
     ): Response
     {
-        return $this->handleRequest($reccuringEventOccurenceRepository->find($id));
-    }
-
-    private function handleRequest(RecurringEventOccurence $reccuringEventOccurence): Response
-    {
-        $request = $this->requestStack->getMainRequest();
-        $form = $this->createForm(EventOccurenceFormType::class, $reccuringEventOccurence);
+        $showDelete = true;
+        if ($occurence === null) {
+            $occurence = $this->createNewOccurence($recurringEvent);
+            $showDelete = false;
+        }
+        $form = $this->createForm(EventOccurenceFormType::class, $occurence);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reccuringEventOccurence = $form->getData();
-            $this->entityManager->persist($reccuringEventOccurence);
+            $occurence = $form->getData();
+            $this->entityManager->persist($occurence);
             $this->entityManager->flush();
 
             return $this->redirectToRoute('app_index');
@@ -59,6 +47,27 @@ class NewEventController extends AbstractController
 
         return $this->render('EventOccurenceForm.html.twig', [
             'form' => $form->createView(),
+            'occurence' => $occurence,
+            'showDelete' => $showDelete,
         ]);
+    }
+
+    #[Route('/delete/{id}', name: 'delete-event')]
+    public function deleteEvent ($id, EntityManagerInterface $em)
+    {
+      $event = $em->getRepository (RecurringEventOccurence::class)->find ($id);
+      $em->remove ($event);
+      $em->flush ();
+      return $this->redirectToRoute ('app_index');
+    }
+    
+
+    private function createNewOccurence(RecurringEvent $recurringEvent): RecurringEventOccurence
+    {
+        $occurence = new RecurringEventOccurence();
+        $occurence->setReccuringEvent($recurringEvent);
+        $occurence->setTimestamp(new \DateTime());
+        $occurence->setDuration(60);
+        return $occurence;
     }
 }
