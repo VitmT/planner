@@ -45,8 +45,19 @@ class NewEventController extends AbstractController
 
         return $this->render('EventOccurenceForm.html.twig', [
             'form' => $form->createView(),
+            'occurence' => $occurence
         ]);
     }
+
+    #[Route('/delete/{id}', name: 'delete-event')]
+    public function deleteEvent ($id, EntityManagerInterface $em) // add this parameter
+    {
+      $event = $em->getRepository (RecurringEventOccurence::class)->find ($id);
+      $em->remove ($event);
+      $em->flush ();
+      return $this->redirectToRoute ('app_index');
+    }
+    
 
     private function createNewOccurence(RecurringEvent $recurringEvent): RecurringEventOccurence
     {
