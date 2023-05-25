@@ -11,7 +11,6 @@ use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
 use App\Entity\ReccuringEvent as RecurringEvent;
 use App\Repository\ReccuringEventOccurenceRepository;
 use App\Repository\ReccuringEventRepository;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class NewEventController extends AbstractController
@@ -37,31 +36,31 @@ class NewEventController extends AbstractController
         }
         $form = $this->createForm(EventOccurenceFormType::class, $occurence);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $occurence = $form->getData();
             $this->entityManager->persist($occurence);
             $this->entityManager->flush();
-    
+
             return $this->redirectToRoute('app_index');
         }
-    
+
         return $this->render('EventOccurenceForm.html.twig', [
             'form' => $form->createView(),
             'occurence' => $occurence,
             'showDelete' => $showDelete,
-
         ]);
-    }    
+    }
 
     #[Route('/delete/{id}', name: 'delete-event')]
     public function deleteEvent ($id, EntityManagerInterface $em)
     {
-        $this->entityManager->remove($occurence);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_index');
+      $event = $em->getRepository (RecurringEventOccurence::class)->find ($id);
+      $em->remove ($event);
+      $em->flush ();
+      return $this->redirectToRoute ('app_index');
     }
+    
 
     private function createNewOccurence(RecurringEvent $recurringEvent): RecurringEventOccurence
     {
