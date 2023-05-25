@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use App\Recurrence\RecurrenceService;
+use App\Recurrence\RecurringService;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
