@@ -8,7 +8,7 @@ class RecurringService
         "weekly" => RecurrenceWeekly::class,
     ];
 
-    public function getRecurrence(string $type)
+    public function getRecurrence(string $type): Recurrence
     {
         $class = self::TYPES[$type] ?? RecurrenceWeekly::class;
         return new $class;

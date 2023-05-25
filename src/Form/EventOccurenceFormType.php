@@ -30,7 +30,6 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
                 'class' => 'form-control mb-3',
             ],
             'widget' => 'single_text',
-            'data' => new \DateTime(),
             ]
         );
 
