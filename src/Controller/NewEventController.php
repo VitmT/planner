@@ -23,8 +23,10 @@ class NewEventController extends AbstractController
         Request $request
     ): Response
     {
+        $showDelete = true;
         if ($occurence === null) {
             $occurence = $this->createNewOccurence($recurringEvent);
+            $showDelete = false;
         }
         $form = $this->createForm(EventOccurenceFormType::class, $occurence);
         $form->handleRequest($request);
@@ -39,12 +41,13 @@ class NewEventController extends AbstractController
 
         return $this->render('EventOccurenceForm.html.twig', [
             'form' => $form->createView(),
-            'occurence' => $occurence
+            'occurence' => $occurence,
+            'showDelete' => $showDelete,
         ]);
     }
 
     #[Route('/delete/{id}', name: 'delete-event')]
-    public function deleteEvent ($id, EntityManagerInterface $em) // add this parameter
+    public function deleteEvent ($id, EntityManagerInterface $em)
     {
       $event = $em->getRepository (RecurringEventOccurence::class)->find ($id);
       $em->remove ($event);
