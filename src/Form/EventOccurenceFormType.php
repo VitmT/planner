@@ -54,6 +54,7 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
                 'class' => 'form-control mb-3 timepicker',
             ],
             'widget' => 'single_text',
+            'data' => new \DateTimeImmutable('01:00:00'),
             ]
         );
 
