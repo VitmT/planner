@@ -11,6 +11,7 @@ use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
 use App\Entity\ReccuringEvent as RecurringEvent;
 use App\Repository\ReccuringEventOccurenceRepository;
 use App\Repository\ReccuringEventRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Recurrence\RecurringService;
 use DateTimeImmutable;
@@ -26,7 +27,8 @@ class NewEventController extends AbstractController
     public function edit(
         ?RecurringEvent $recurringEvent,
         ?RecurringEventOccurence $occurence,
-        Request $request
+        Request $request,
+        ReccuringEventOccurenceRepository $reccuringEventOccurenceRepository
     ): Response
     {
         $showDelete = true;

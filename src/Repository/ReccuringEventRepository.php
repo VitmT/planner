@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\ReccuringEvent;
+use App\Entity\ReccuringEventOccurence;
+use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\User;
+
 
 /**
  * @extends ServiceEntityRepository<ReccuringEvent>
@@ -28,17 +32,52 @@ class ReccuringEventRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-    }
-
-    public function remove(ReccuringEvent $entity, bool $flush = false): void
+//            ->orderBy('r.id', 'ASC')
     {
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-    }
+    }}
 
+    public function getRecurringEventsForUser(User $user): array
+    {
+        if ($user->hasAccessToAllEvents()) {
+            return $this->findAll();
+        } else {
+            return $user->getEvents()->toArray();
+        }
+    }
+    public function getLastOccurrence(ReccuringEvent $reccuringEvent): ?ReccuringEventOccurence
+    {
+        $queryBuilder = $this->createQueryBuilder('r');
+    
+        $result = $queryBuilder
+            ->andWhere('r.recurringId = :val')
+            ->setParameter('val', $reccuringEvent->getId())
+            ->orderBy('r.timestamp', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    
+        return $result;
+    }
+    public function getNextOccurrence(ReccuringEvent $reccuringEvent, DateTimeInterface $now): ?ReccuringEventOccurence
+    {
+        $queryBuilder = $this->createQueryBuilder('r');
+    
+        $result = $queryBuilder
+            ->andWhere('r.recurringId = :val')
+            ->andWhere('r.now = :val')
+            ->setParameter('val', $reccuringEvent->getId())
+            ->orderBy('r.timestamp', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    
+        return $result;
+    }
 //    /**
 //     * @return ReccuringEvent[] Returns an array of ReccuringEvent objects
 //     */
