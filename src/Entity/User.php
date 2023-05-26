@@ -83,29 +83,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function hasRole(string $role): bool
-    {
-        return in_array($role, $this->getRoles());
-    }
-
-    public function hasAccessToEvent(ReccuringEvent $event): bool
-    {
-        if ($this->hasAccessToAllEvents()) {
-            return true;
-        }
-        return $this->events->contains($event);
-    }
-
-    public function hasAccessToAllEvents(): bool
-    {
-	    return $this->hasRole("ROLE_ALLEVENTS");
-    }
-
-    public function hasAccessToEventOccurence(ReccuringEventOccurence $occurence): bool
-    {
-	    return $this->hasAccessToEvent($occurence->getRecurringEvent());
-    }
-
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -135,7 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getEvents(): Collection
     {
-         return $this->events;
+        return $this->events;
     }
 
     public function addEvent(ReccuringEvent $event): self
