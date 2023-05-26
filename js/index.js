@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-    console.log('daaa')
-    
     $('.timepicker').timepicker({
         timeFormat: 'HH:mm',
         interval: 30,
@@ -18,7 +16,7 @@ $(document).ready(function(){
         scrollbar: true,
         minTime: '00:00',
         maxTime: '05:00',
-        defaultTime: '0'
+        defaultTime: '1:00'
     });
 
 })
