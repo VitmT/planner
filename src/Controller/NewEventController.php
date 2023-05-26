@@ -9,12 +9,10 @@ use Doctrine\ORM\EntityManagerInterface as EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
 use App\Entity\ReccuringEvent as RecurringEvent;
-use App\Repository\ReccuringEventOccurenceRepository;
-use App\Repository\ReccuringEventRepository;
-use DateTime;
-use Symfony\Component\HttpFoundation\RequestStack;
 use App\Recurrence\RecurringService;
 use DateTimeImmutable;
+
+
 class NewEventController extends AbstractController
 {
     public function __construct(EntityManager $entityManager, private RecurringService $recurringService)
@@ -27,16 +25,16 @@ class NewEventController extends AbstractController
     public function edit(
         ?RecurringEvent $recurringEvent,
         ?RecurringEventOccurence $occurence,
-        Request $request,
-        ReccuringEventOccurenceRepository $reccuringEventOccurenceRepository
+        Request $request
     ): Response
     {
-        dd($reccuringEventOccurenceRepository->getLastOccurrence($recurringEvent));
         $showDelete = true;
         if ($occurence === null) {
             $occurence = $this->createNewOccurence($recurringEvent);
             $showDelete = false;
-        }
+	} else {
+		$recurringEvent = $occurence->getRecurringEvent()
+	}
         $form = $this->createForm(EventOccurenceFormType::class, $occurence);
         $form->handleRequest($request);
 
@@ -69,12 +67,14 @@ class NewEventController extends AbstractController
     private function createNewOccurence(RecurringEvent $recurringEvent): RecurringEventOccurence
     {
         $occurence = new RecurringEventOccurence();
-        //$occurence->setReccuringEvent($recurringEvent);
+        $occurence->setReccuringEvent($recurringEvent);
         $recurrence = $this->recurringService->getRecurrence($recurringEvent->getReccurenceType());
         $defaultTimestamp = $recurringEvent->getDefaultTimestamp();
         if ($defaultTimestamp !== null) {
             $defaultTimestamp = DateTimeImmutable::createFromInterface($defaultTimestamp);
-            $scheduledTimestamp = $recurrence->getNextTimestamp($defaultTimestamp, new DateTimeImmutable(), null);
+            $now = new DateTimeImmutable();
+            $lastOccurenceTimestamp = $this->getLastOccurenceTimestamp($recurringEvent);
+            $scheduledTimestamp = $recurrence->getNextTimestamp($defaultTimestamp, $now, $lastOccurenceTimestamp);
         } else {
             $scheduledTimestamp = new DateTimeImmutable();
         }
@@ -82,4 +82,19 @@ class NewEventController extends AbstractController
         $occurence->setDuration(60);
         return $occurence;
     }
+
+    private function getLastOccurenceTimestamp(RecurringEvent $recurringEvent): ?DateTimeImmutable
+{
+    $lastOccurrence = $this->getRepository(RecurringEventOccurence::class)->getLastOccurrence($recurringEvent);
+    
+    if ($lastOccurrence === null) {
+        return null;
+    }
+    else
+    {
+        return DateTimeImmutable::createFromMutable($lastOccurrence->getTimestamp());
+    }
+    
+}
+
 }
