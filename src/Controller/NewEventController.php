@@ -5,13 +5,14 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\EventOccurenceFormType;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface as EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
 use App\Entity\ReccuringEvent as RecurringEvent;
 use App\Recurrence\RecurringService;
 use DateTimeImmutable;
-
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class NewEventController extends AbstractController
 {
@@ -28,13 +29,13 @@ class NewEventController extends AbstractController
         Request $request
     ): Response
     {
+        $this->authorize($recurringEvent, $occurence);
         $showDelete = true;
         if ($occurence === null) {
             $occurence = $this->createNewOccurence($recurringEvent);
             $showDelete = false;
-	} else {
-		$recurringEvent = $occurence->getRecurringEvent()
-	}
+	    }
+
         $form = $this->createForm(EventOccurenceFormType::class, $occurence);
         $form->handleRequest($request);
 
@@ -63,7 +64,21 @@ class NewEventController extends AbstractController
       return $this->redirectToRoute ('app_index');
     }
     
-
+    private function authorize(?RecurringEvent $event, ?RecurringEventOccurence $occurence): void
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $authorized = true;
+        if ($event !== null && !$user->hasAccessToEvent($event)) {
+            $authorized = false;
+        }
+        if ($occurence !== null && !$user->hasAccessToEventOccurence($occurence)) {
+            $authorized = false;
+        }
+        if (!$authorized) {
+            throw new UnauthorizedHttpException("Unauthorized");
+        }
+    }
     private function createNewOccurence(RecurringEvent $recurringEvent): RecurringEventOccurence
     {
         $occurence = new RecurringEventOccurence();
