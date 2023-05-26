@@ -30,7 +30,6 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
                 'class' => 'form-control mb-3',
             ],
             'widget' => 'single_text',
-            'data' => new \DateTime(),
             ]
         );
 
@@ -47,14 +46,15 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
         );
 
         $builder->add(
-            'endTimeOffset',
+            'duration',
             TimeType::class,
             [
-            'label' => 'End Time',
+            'label' => 'Duration',
             'attr' => [
                 'class' => 'form-control mb-3 timepicker',
             ],
             'widget' => 'single_text',
+            'data' => new \DateTimeImmutable('01:00:00'),
             ]
         );
 
@@ -115,7 +115,7 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
         }
         $date->$method(new DateInterval(sprintf('PT%dS', $duration)));
 
-        $forms['endTimeOffset']->setData($date);
+        $forms['duration']->setData($date);
     }
 
     public function mapFormsToData(iterable $forms, &$viewData): void
@@ -127,12 +127,12 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
 
         $date = $forms['timestamp']->getData();
         $startTime = $forms['startTimeOffset']->getData();
-        $endTime = $forms['endTimeOffset']->getData();
+        $duration = $forms['duration']->getData();
 
         $startDateTime = new DateTime($date->format('d-m-Y') . ' ' . $startTime->format('H:i:s'));
         $viewData->setTimestamp($startDateTime);
 
-        $duration = $endTime->getTimestamp() - $startTime->getTimestamp();
+        $duration = $duration->getTimestamp() - $startTime->getTimestamp();
         $viewData->setDuration($duration);
     }
 }

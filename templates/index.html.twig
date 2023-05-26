@@ -11,6 +11,7 @@
                         <thead class="table-dark">
                             <th scope="col">Place</th>
                             <th scope="col">Date</th>
+                            <th scope="col">Duration</th>
                             <th></th>
                         </thead>
                         <tbody>
@@ -18,7 +19,8 @@
                         {% for occurence in occurences %}
                             <tr>
                                 <td>{{ occurence.reccuringEvent.name }}</td>
-                                <td>{{ occurence.timestamp|date("m/d/Y") }}</td>
+                                <td>{{ occurence.timestamp|date("m/d/Y H:i") }}</td>
+                                <td>{{ occurence.duration }}</td>
                                 <td><a href="{{ path('edit-event', {occurence: occurence.id}) }}" type="submit" class="p-1 btn btn-success bi bi-pen" value="Edit Event"></a></td> 
                             </tr>
                         {% endfor %}
