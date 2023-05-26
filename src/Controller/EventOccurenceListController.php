@@ -12,14 +12,11 @@ class EventOccurenceListController extends AbstractController
     #[Route('/event-list', name: 'event-list')]
     public function eventoccurencelist(ReccuringEventRepository $reccuringEventRepository): Response
     {
-	    $reccuringEvents = $reccuringEventRepository->getRecurringEventsForUser($this->getUser());
-        if (count($reccuringEvents) == 1) {
-            $recurringEvent = $reccuringEvents[0];
-            //return $this->redirectToRoute("new-event", ["reccuringEventId" => $recurringEvent->getId()]);
-        }
-        return $this->render('EventOccurenceList.html.twig',[
+        $reccuringEvents = $reccuringEventRepository->findAll();
+        // dd( $reccuringEventOccurences[0]->getReccuringEvent());
+         return $this->render('EventOccurenceList.html.twig',[
              "events" => $reccuringEvents
-        ]);
+         ]);
  
         
     }

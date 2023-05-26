@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\ReccuringEvent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\User;
 
 /**
  * @extends ServiceEntityRepository<ReccuringEvent>
@@ -29,21 +28,14 @@ class ReccuringEventRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-//            ->orderBy('r.id', 'ASC')
+    }
+
+    public function remove(ReccuringEvent $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
             $this->getEntityManager()->flush();
-        }
-    }}
-
-    public function getRecurringEventsForUser(User $user): array
-    {
-        if ($user->hasAccessToAllEvents()) {
-            return $this->findAll();
-        } else {
-            return $user->getEvents()->toArray();
         }
     }
 
