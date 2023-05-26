@@ -31,7 +31,7 @@ class NewEventController extends AbstractController
         ReccuringEventOccurenceRepository $reccuringEventOccurenceRepository
     ): Response
     {
-        dd($reccuringEventOccurenceRepository->getNextOccurence($recurringEvent, new DateTime()));
+        dd($reccuringEventOccurenceRepository->getLastOccurrence($recurringEvent));
         $showDelete = true;
         if ($occurence === null) {
             $occurence = $this->createNewOccurence($recurringEvent);
