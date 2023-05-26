@@ -11,6 +11,7 @@ use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
 use App\Entity\ReccuringEvent as RecurringEvent;
 use App\Repository\ReccuringEventOccurenceRepository;
 use App\Repository\ReccuringEventRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class NewEventController extends AbstractController
@@ -26,9 +27,11 @@ class NewEventController extends AbstractController
     public function edit(
         ?RecurringEvent $recurringEvent,
         ?RecurringEventOccurence $occurence,
-        Request $request
+        Request $request,
+        ReccuringEventOccurenceRepository $reccuringEventOccurenceRepository
     ): Response
     {
+        dd($reccuringEventOccurenceRepository->getNextOccurence($recurringEvent, new DateTime()));
         $showDelete = true;
         if ($occurence === null) {
             $occurence = $this->createNewOccurence($recurringEvent);

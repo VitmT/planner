@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\ReccuringEventOccurence;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\ReccuringEvent as RecurringEvent;
+use App\Repository\ReccuringEventRepository;
+use DateTimeInterface;
 
 /**
  * @extends ServiceEntityRepository<ReccuringEventOccurence>
@@ -37,6 +40,36 @@ class ReccuringEventOccurenceRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getLastOccurrence(RecurringEvent $recurringEvent): ?ReccuringEventOccurence
+    {
+        $queryBuilder = $this->createQueryBuilder('r');
+    
+        $result = $queryBuilder
+            ->andWhere('r.reccuringEvent = :val')
+            ->setParameter('val', $recurringEvent->getId())
+            ->orderBy('r.timestamp', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    
+        return $result;
+    }
+    public function getNextOccurence(RecurringEvent $recurringEvent, DateTimeInterface $now): ?ReccuringEventOccurence
+    {
+        $queryBuilder = $this->createQueryBuilder('r');
+    
+        $result = $queryBuilder
+            ->andWhere('r.reccuringEvent = :val')
+            ->andWhere('r.now = :val')
+            ->setParameter('val', $recurringEvent->getId())
+            ->orderBy('r.timestamp', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    
+        return $result;
     }
 
 //    /**
