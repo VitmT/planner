@@ -49,7 +49,7 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
             'endTimeOffset',
             TimeType::class,
             [
-            'label' => 'End Time',
+            'label' => 'Duration',
             'attr' => [
                 'class' => 'form-control mb-3 timepicker',
             ],
