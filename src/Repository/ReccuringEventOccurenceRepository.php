@@ -32,6 +32,11 @@ class ReccuringEventOccurenceRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getRecurringEventOccurencesForRecurringEvent(RecurringEvent $recurringEvent): array
+    {
+        return $this->findBy(['reccuringEvent' => $recurringEvent]);
+    }
+
 
     public function remove(ReccuringEventOccurence $entity, bool $flush = false): void
     {
