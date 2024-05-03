@@ -32,6 +32,11 @@ class ReccuringEventOccurenceRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getRecurringEventOccurencesForRecurringEvent(RecurringEvent $recurringEvent): array
+    {
+        return $this->findBy(['reccuringEvent' => $recurringEvent]);
+    }
+
 
     public function remove(ReccuringEventOccurence $entity, bool $flush = false): void
     {
@@ -56,19 +61,21 @@ class ReccuringEventOccurenceRepository extends ServiceEntityRepository
     
         return $result;
     }
+        // Repository method
     public function getNextOccurence(RecurringEvent $recurringEvent, DateTimeInterface $now): ?ReccuringEventOccurence
     {
         $queryBuilder = $this->createQueryBuilder('r');
-    
+
         $result = $queryBuilder
             ->andWhere('r.reccuringEvent = :val')
-            ->andWhere('r.now = :val')
+            ->andWhere('r.timestamp >= :now') 
             ->setParameter('val', $recurringEvent->getId())
+            ->setParameter('now', $now)
             ->orderBy('r.timestamp', 'ASC')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
-    
+
         return $result;
     }
 

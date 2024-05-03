@@ -103,7 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function hasAccessToEventOccurence(ReccuringEventOccurence $occurence): bool
     {
-	    return $this->hasAccessToEvent($occurence->getRecurringEvent());
+	    return $this->hasAccessToEvent($occurence->getReccuringEvent());
     }
 
     /**

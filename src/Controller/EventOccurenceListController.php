@@ -15,8 +15,9 @@ class EventOccurenceListController extends AbstractController
 	    $reccuringEvents = $reccuringEventRepository->getRecurringEventsForUser($this->getUser());
         if (count($reccuringEvents) == 1) {
             $recurringEvent = $reccuringEvents[0];
-            //return $this->redirectToRoute("new-event", ["reccuringEventId" => $recurringEvent->getId()]);
+            return $this->redirectToRoute("new-event", ["recurringEvent" => $recurringEvent->getId()]);
         }
+
         return $this->render('EventOccurenceList.html.twig',[
              "events" => $reccuringEvents
         ]);

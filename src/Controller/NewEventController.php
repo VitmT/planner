@@ -5,16 +5,15 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\EventOccurenceFormType;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface as EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ReccuringEventOccurence as RecurringEventOccurence;
 use App\Entity\ReccuringEvent as RecurringEvent;
-use App\Repository\ReccuringEventOccurenceRepository;
-use App\Repository\ReccuringEventRepository;
-use DateTime;
-use Symfony\Component\HttpFoundation\RequestStack;
 use App\Recurrence\RecurringService;
 use DateTimeImmutable;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+
 class NewEventController extends AbstractController
 {
     public function __construct(EntityManager $entityManager, private RecurringService $recurringService)
@@ -27,15 +26,16 @@ class NewEventController extends AbstractController
     public function edit(
         ?RecurringEvent $recurringEvent,
         ?RecurringEventOccurence $occurence,
-        Request $request,
-        ReccuringEventOccurenceRepository $reccuringEventOccurenceRepository
+        Request $request
     ): Response
     {
+        $this->authorize($recurringEvent, $occurence);
         $showDelete = true;
         if ($occurence === null) {
             $occurence = $this->createNewOccurence($recurringEvent);
             $showDelete = false;
-        }
+	    }
+
         $form = $this->createForm(EventOccurenceFormType::class, $occurence);
         $form->handleRequest($request);
 
@@ -64,16 +64,32 @@ class NewEventController extends AbstractController
       return $this->redirectToRoute ('app_index');
     }
     
-
+    private function authorize(?RecurringEvent $event, ?RecurringEventOccurence $occurence): void
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $authorized = true;
+        if ($event !== null && !$user->hasAccessToEvent($event)) {
+            $authorized = false;
+        }
+        if ($occurence !== null && !$user->hasAccessToEventOccurence($occurence)) {
+            $authorized = false;
+        }
+        if (!$authorized) {
+            throw new UnauthorizedHttpException("Unauthorized");
+        }
+    }
     private function createNewOccurence(RecurringEvent $recurringEvent): RecurringEventOccurence
     {
         $occurence = new RecurringEventOccurence();
-        //$occurence->setReccuringEvent($recurringEvent);
+        $occurence->setReccuringEvent($recurringEvent);
         $recurrence = $this->recurringService->getRecurrence($recurringEvent->getReccurenceType());
         $defaultTimestamp = $recurringEvent->getDefaultTimestamp();
         if ($defaultTimestamp !== null) {
             $defaultTimestamp = DateTimeImmutable::createFromInterface($defaultTimestamp);
-            $scheduledTimestamp = $recurrence->getNextTimestamp($defaultTimestamp, new DateTimeImmutable(), null);
+            $now = new DateTimeImmutable();
+            $lastOccurenceTimestamp = $this->getLastOccurenceTimestamp($recurringEvent);
+            $scheduledTimestamp = $recurrence->getNextTimestamp($defaultTimestamp, $now, $lastOccurenceTimestamp);
         } else {
             $scheduledTimestamp = new DateTimeImmutable();
         }
@@ -81,4 +97,19 @@ class NewEventController extends AbstractController
         $occurence->setDuration(60);
         return $occurence;
     }
+
+    private function getLastOccurenceTimestamp(RecurringEvent $recurringEvent): ?DateTimeImmutable
+{
+    $lastOccurrence = $this->getRepository(RecurringEventOccurence::class)->getLastOccurrence($recurringEvent);
+    
+    if ($lastOccurrence === null) {
+        return null;
+    }
+    else
+    {
+        return DateTimeImmutable::createFromMutable($lastOccurrence->getTimestamp());
+    }
+    
+}
+
 }

@@ -113,7 +113,7 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
         } else {
             $method = 'add';
         }
-        $date->$method(new DateInterval(sprintf('PT%dS', $duration)));
+        $date->$method(new DateInterval(sprintf('PT%dH', $duration)));
 
         $forms['duration']->setData($date);
     }
@@ -132,7 +132,7 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
         $startDateTime = new DateTime($date->format('d-m-Y') . ' ' . $startTime->format('H:i:s'));
         $viewData->setTimestamp($startDateTime);
 
-        $duration = $duration->getTimestamp() - $startTime->getTimestamp();
+        $duration = $duration->getTimestamp()/60 ;
         $viewData->setDuration($duration);
     }
 }
