@@ -22,7 +22,10 @@ class ReccuringEventOccurence
 
     #[ORM\ManyToOne(inversedBy: 'reccuringEventOccurences')]
     #[ORM\JoinColumn(nullable: false)]
-    private ReccuringEvent $reccuringEvent;
+    private ?ReccuringEvent $reccuringEvent = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $note = null;
 
     public function getId(): ?int
     {
@@ -61,6 +64,18 @@ class ReccuringEventOccurence
     public function setReccuringEvent(?ReccuringEvent $reccuringEvent): self
     {
         $this->reccuringEvent = $reccuringEvent;
+
+        return $this;
+    }
+
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    public function setNote(?string $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }

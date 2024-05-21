@@ -5,6 +5,11 @@
         <div class="col-md-6">
             <div class="card px-5 py-5">
                 <div class="form-data">
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            Chybné uživatelské jméno nebo heslo
+                        </div>
+                    {% endif %}
                     <div class="d-grid gap-2 mx-auto justify-content-center">
                         {{ form(form) }}
                     </div>

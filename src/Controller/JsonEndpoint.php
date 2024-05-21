@@ -13,12 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class JsonEndpoint extends AbstractController
 {
-    #[Route('/json-endpoint')]
-    public function getNextOccurrence(Request $request): JsonResponse
+    #[Route('/event')]
+    public function getNextOccurrence(Request $request, ReccuringEventOccurenceRepository $repository): JsonResponse
     {
         $now = new DateTimeImmutable();
         $recurringEventId = $request->query->get('reccuringEvent');
-        $repository = $this->getRepository(ReccuringEventOccurence::class);
+
+        if (!$recurringEventId) {
+            return $this->json(['error' => 'reccuringEvent parameter is missing'], 400);
+        }
 
         $result = $repository->createQueryBuilder('r')
             ->andWhere('r.reccuringEvent = :val')
@@ -30,6 +33,18 @@ class JsonEndpoint extends AbstractController
             ->getQuery()
             ->getOneOrNullResult();
 
-        return $this->json($result);
+        if (!$result) {
+            return $this->json(['error' => 'No occurrence found for the given event ID'], 404);
+        }
+                $response = [
+                    'timestamp' => $result->getTimestamp()->format('Y-m-d H:i:s'),
+                    'duration' => $result->getDuration(),
+                    'recurringEvent' => [
+                        'name' => $result->getReccuringEvent()->getName(),
+                        'note' => $result->getNote(),
+                    ]
+                ];
+        
+        return $this->json($response);
     }
 }

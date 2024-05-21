@@ -21,7 +21,7 @@
 
 LOCK TABLES `reccuring_event` WRITE;
 /*!40000 ALTER TABLE `reccuring_event` DISABLE KEYS */;
-INSERT INTO `reccuring_event` (`id`, `name`, `default_timestamp`, `reccurence_type`) VALUES (1,'Chodov','2023-06-12 08:30:00','weekly'),(4,'Sokolov','2023-06-19 08:30:00','weekly'),(5,'Ostrov','2023-06-26 08:30:00','weekly'),(6,'Stará Role','2023-07-02 08:30:00','weekly'),(7,'Nové Sedlo','2023-07-09 08:30:00','weekly'),(8,'Karlovy Vary','2023-07-16 08:30:00','weekly'),(9,'Svatava','2023-07-23 08:30:00','weekly'),(10,'Dalovice','2023-07-30 08:30:00','weekly');
+INSERT INTO `reccuring_event` (`id`, `name`, `default_timestamp`, `reccurence_type`) VALUES (1,'Chodov','2023-06-12 08:30:00','weekly'),(4,'Sokolov','2024-06-19 08:30:00','weekly'),(5,'Ostrov','2023-06-26 08:30:00','weekly'),(6,'Stará Role','2023-07-02 08:30:00','weekly'),(7,'Nové Sedlo','2023-07-09 08:30:00','weekly'),(8,'Karlovy Vary','2023-07-16 08:30:00','weekly'),(9,'Svatava','2023-07-23 08:30:00','weekly'),(10,'Dalovice','2023-07-30 08:30:00','weekly');
 /*!40000 ALTER TABLE `reccuring_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `reccuring_event_occurence` WRITE;
 /*!40000 ALTER TABLE `reccuring_event_occurence` DISABLE KEYS */;
-INSERT INTO `reccuring_event_occurence` (`id`, `reccuring_event_id`, `timestamp`, `duration`) VALUES (1,1,'2023-06-07 08:30:00',2),(2,1,'2023-06-14 08:30:00',1),(3,1,'2023-06-21 08:30:00',2),(4,1,'2023-06-28 08:30:00',2),(5,1,'2023-07-04 08:30:00',1),(6,1,'2023-07-11 08:30:00',1),(7,1,'2023-07-18 08:30:00',1),(8,1,'2023-07-25 08:30:00',2);
+INSERT INTO `reccuring_event_occurence` (`id`, `reccuring_event_id`, `timestamp`, `duration`, `note`) VALUES (5,1,'2024-05-19 08:30:00',60,NULL),(9,4,'2024-05-20 08:30:00',60,'nechapu to'),(10,5,'2024-05-20 08:30:00',60,'mam te rad marku :)'),(11,7,'2024-05-19 08:30:00',60,'dal bych si kfc :(');
 /*!40000 ALTER TABLE `reccuring_event_occurence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[\"ROLE_ALLEVENTS\"]','$2y$13$wuIsvuu9bf5qXdNSJP2tWOGy.V0caO3h5aiJJJhU6pdSY077eqEU6'),(2,'vitek','[\"\"]','$2y$13$I32l6kNVLiLPCmDMNCeaR.eO1qE0cHFgW/cLSI5XLpQd54WZWdDrG');
+INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[\"ROLE_ALLEVENTS\"]','$2y$13$EDckCaGEwUnEcP0o1o9yKOSErdEAYl0TEn1pL2Tn/zFvBBh/5Zi5K'),(2,'vitek','[\"ROLE_USER\"]','$2y$13$Y4G9.gB4KwsDr62aQ0IcuO8mc.QlwhFlk6JHyfyXqBzmZqlxugWQm');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-15  7:19:50
+-- Dump completed on 2024-05-20  6:33:31

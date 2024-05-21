@@ -58,6 +58,17 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
             ]
         );
 
+        $builder->add(
+            'note',
+            TextareaType::class,
+            [
+            'label' => 'Poznámka',
+            'required' => false,
+            'attr' => [
+                'class' => 'form-control mb-3',
+            ]
+            ]
+        );
 
         $builder->add(
             'save',
@@ -100,7 +111,7 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
 
         $startDateTime = $viewData->getTimestamp();
         $duration = $viewData->getDuration();
-        
+        $note = $viewData->getNote();
         // initialize form field values
         $forms['timestamp']->setData(new DateTime($startDateTime->format('d-m-Y')));
         $forms['startTimeOffset']->setData($viewData->getTimestamp());
@@ -116,6 +127,7 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
         $date->$method(new DateInterval(sprintf('PT%dH', $duration)));
 
         $forms['duration']->setData($date);
+        $forms['note']->setData($note);
     }
 
     public function mapFormsToData(iterable $forms, &$viewData): void
@@ -128,11 +140,12 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
         $date = $forms['timestamp']->getData();
         $startTime = $forms['startTimeOffset']->getData();
         $duration = $forms['duration']->getData();
-
+        $note = $forms['note']->getData();
         $startDateTime = new DateTime($date->format('d-m-Y') . ' ' . $startTime->format('H:i:s'));
         $viewData->setTimestamp($startDateTime);
 
         $duration = $duration->getTimestamp()/60 ;
         $viewData->setDuration($duration);
+        $viewData->setNote($note);
     }
 }
