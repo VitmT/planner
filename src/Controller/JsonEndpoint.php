@@ -37,14 +37,11 @@ class JsonEndpoint extends AbstractController
             return $this->json(['error' => 'No occurrence found for the given event ID'], 404);
         }
                 $response = [
-                    //'id' => $result->getId(),
                     'timestamp' => $result->getTimestamp()->format('Y-m-d H:i:s'),
                     'duration' => $result->getDuration(),
                     'recurringEvent' => [
-                        //'id' => $result->getReccuringEvent()->getId(),
                         'name' => $result->getReccuringEvent()->getName(),
                         'note' => $result->getNote(),
-                        //'recurrenceType' => $result->getReccuringEvent()->getReccurenceType(),
                     ]
                 ];
         

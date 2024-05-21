@@ -6,3 +6,16 @@
     top:10px;
     left: 10px;
 }
+.table-responsive {
+    overflow-x: auto;
+}
+
+@media (max-width: 576px) {
+    .btn {
+        font-size: 14px;
+    }
+
+    .table th, .table td {
+        font-size: 14px;
+    }
+}

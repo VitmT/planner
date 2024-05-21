@@ -63,6 +63,7 @@ class EventOccurenceFormType extends AbstractType implements DataMapperInterface
             TextareaType::class,
             [
             'label' => 'Poznámka',
+            'required' => false,
             'attr' => [
                 'class' => 'form-control mb-3',
             ]

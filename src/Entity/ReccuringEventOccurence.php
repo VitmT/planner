@@ -24,7 +24,7 @@ class ReccuringEventOccurence
     #[ORM\JoinColumn(nullable: false)]
     private ?ReccuringEvent $reccuringEvent = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $note = null;
 
     public function getId(): ?int
@@ -73,7 +73,7 @@ class ReccuringEventOccurence
         return $this->note;
     }
 
-    public function setNote(string $note): self
+    public function setNote(?string $note): self
     {
         $this->note = $note;
 

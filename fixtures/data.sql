@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `reccuring_event_occurence` WRITE;
 /*!40000 ALTER TABLE `reccuring_event_occurence` DISABLE KEYS */;
-INSERT INTO `reccuring_event_occurence` (`id`, `reccuring_event_id`, `timestamp`, `duration`) VALUES (5,1,'2024-07-04 08:30:00',60),(9,4,'2024-05-20 08:30:00',60),(10,5,'2024-05-20 08:30:00',60);
+INSERT INTO `reccuring_event_occurence` (`id`, `reccuring_event_id`, `timestamp`, `duration`, `note`) VALUES (5,1,'2024-05-19 08:30:00',60,NULL),(9,4,'2024-05-20 08:30:00',60,'nechapu to'),(10,5,'2024-05-20 08:30:00',60,'mam te rad marku :)'),(11,7,'2024-05-19 08:30:00',60,'dal bych si kfc :(');
 /*!40000 ALTER TABLE `reccuring_event_occurence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[\"ROLE_ALLEVENTS\"]','$2y$13$EDckCaGEwUnEcP0o1o9yKOSErdEAYl0TEn1pL2Tn/zFvBBh/5Zi5K'),(2,'vitek','[\"ROLE_USER\"]','$2y$13$EDckCaGEwUnEcP0o1o9yKOSErdEAYl0TEn1pL2Tn/zFvBBh/5Zi5K');
+INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES (1,'marek','[\"ROLE_ALLEVENTS\"]','$2y$13$EDckCaGEwUnEcP0o1o9yKOSErdEAYl0TEn1pL2Tn/zFvBBh/5Zi5K'),(2,'vitek','[\"ROLE_USER\"]','$2y$13$Y4G9.gB4KwsDr62aQ0IcuO8mc.QlwhFlk6JHyfyXqBzmZqlxugWQm');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-16  7:15:41
+-- Dump completed on 2024-05-20  6:33:31
