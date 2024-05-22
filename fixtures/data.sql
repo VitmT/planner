@@ -21,7 +21,7 @@
 
 LOCK TABLES `reccuring_event` WRITE;
 /*!40000 ALTER TABLE `reccuring_event` DISABLE KEYS */;
-INSERT INTO `reccuring_event` (`id`, `name`, `default_timestamp`, `reccurence_type`) VALUES (1,'Chodov','2023-06-12 08:30:00','weekly'),(4,'Sokolov','2024-06-19 08:30:00','weekly'),(5,'Ostrov','2023-06-26 08:30:00','weekly'),(6,'Stará Role','2023-07-02 08:30:00','weekly'),(7,'Nové Sedlo','2023-07-09 08:30:00','weekly'),(8,'Karlovy Vary','2023-07-16 08:30:00','weekly'),(9,'Svatava','2023-07-23 08:30:00','weekly'),(10,'Dalovice','2023-07-30 08:30:00','weekly');
+INSERT INTO `reccuring_event` (`id`, `name`, `default_timestamp`, `reccurence_type`) VALUES (1,'Chodov','2023-06-12 08:30:00','weekly'),(4,'Horní Slavkov','2024-06-19 08:30:00','weekly'),(5,'Ostrov','2023-06-26 08:30:00','weekly'),(6,'Nejdek','2023-07-02 08:30:00','weekly'),(7,'Nové Sedlo','2023-07-09 08:30:00','weekly'),(8,'Karlovy Vary','2023-07-16 08:30:00','weekly'),(9,'Podbořany','2023-07-23 08:30:00','weekly');
 /*!40000 ALTER TABLE `reccuring_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `reccuring_event_occurence` WRITE;
 /*!40000 ALTER TABLE `reccuring_event_occurence` DISABLE KEYS */;
-INSERT INTO `reccuring_event_occurence` (`id`, `reccuring_event_id`, `timestamp`, `duration`, `note`) VALUES (5,1,'2024-05-26 08:30:00',60,NULL),(9,4,'2024-05-26 08:30:00',60,'nechapu to'),(10,5,'2024-05-20 08:30:00',60,'mam te rad marku :)'),(11,7,'2024-05-19 08:30:00',60,'dal bych si kfc :(');
+INSERT INTO `reccuring_event_occurence` (`id`, `reccuring_event_id`, `timestamp`, `duration`, `note`) VALUES (5,1,'2024-05-26 08:30:00',60,NULL),(11,7,'2024-05-26 08:30:00',60,NULL);
 /*!40000 ALTER TABLE `reccuring_event_occurence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-22  7:13:21
+-- Dump completed on 2024-05-22  9:33:54
