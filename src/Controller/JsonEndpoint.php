@@ -20,7 +20,7 @@ class JsonEndpoint extends AbstractController
         $recurringEventId = $request->query->get('reccuringEvent');
 
         if (!$recurringEventId) {
-            return $this->json(['error' => 'reccuringEvent parameter is missing'], 400);
+            return $this->json(['error' => 'Data někam zabloudili..'], 400);
         }
 
         $result = $repository->createQueryBuilder('r')
