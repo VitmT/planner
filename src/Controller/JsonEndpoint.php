@@ -45,12 +45,6 @@ class JsonEndpoint extends AbstractController
                     ]
                 ];
 
-        $jsonResponse = $this->json($response);
-
-        $jsonResponse->headers->set('Access-Control-Allow-Origin', '*');
-        $jsonResponse->headers->set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        $jsonResponse->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-        return $this->json($jsonResponse);
+        return $this->json($response);
     }
 }
