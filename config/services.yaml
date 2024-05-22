@@ -33,11 +33,6 @@ services:
         arguments:
             $assetBaseDir: '%kernel.project_dir%/public'
             $versionLinkWildCard: 'assets-v*'
-
-    App\Controller\MainController:
-        arguments:
-            $baseDir: '%kernel.project_dir%/pages'
-
     App\Controller\AdminerController:
         arguments:
             $databaseUrl: '%env(resolve:DATABASE_URL)%'
