@@ -22,6 +22,5 @@ class EventOccurenceListController extends AbstractController
              "events" => $reccuringEvents
         ]);
  
-        
     }
 }
