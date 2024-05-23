@@ -34,7 +34,7 @@ class JsonEndpoint extends AbstractController
             ->getOneOrNullResult();
 
         if (!$result) {
-            return $this->json(['error' => 'No occurrence found for the given event ID'], 404);
+            return $this->json(['error' => 'Data se nám ztratili..'], 404);
         }
                 $response = [
                     'timestamp' => $result->getTimestamp()->format('Y-m-d H:i:s'),
