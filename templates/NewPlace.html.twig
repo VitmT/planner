@@ -8,7 +8,12 @@
     <div class="row d-flex justify-content-center">
         <div class="col-md-6">
             <div class="card px-5 py-5">
-                        {{ form(form) }}
+                {{ form(form) }}
+                {% if form.vars.value.id is not null %}
+                    <form action="{{ path('delete_place', {'id': form.vars.value.id}) }}" method="post" onsubmit="return confirm('Vážně chcete smazat toto místo?');">
+                        <button type="submit" class="btn btn-danger w-100 mt-3">Delete Place</button>
+                    </form>
+                {% endif %}
             </div>
         </div>
     </div>

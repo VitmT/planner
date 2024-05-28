@@ -13,9 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class NewPlaceController extends AbstractController
 {
     #[Route('/new-place', name: 'new_place')]
-    public function newPlace(Request $request, EntityManagerInterface $em): Response
+    #[Route('/edit-place/{id}', name: 'edit_place')]
+    public function newPlace(Request $request, EntityManagerInterface $em, ReccuringEvent $event = null): Response
     {
-        $event = new ReccuringEvent();
+        if ($event === null) {
+            $event = new ReccuringEvent();
+        }
+
         $form = $this->createForm(NewPlaceType::class, $event);
 
         $form->handleRequest($request);
@@ -30,5 +34,15 @@ class NewPlaceController extends AbstractController
         return $this->render('NewPlace.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/delete-place/{id}', name: 'delete_place')] // Přidána nová routa pro smazání místa
+    public function deletePlace(EntityManagerInterface $em, ReccuringEvent $event): Response
+    {
+        if ($event !== null) {
+            $em->remove($event);
+            $em->flush();
+        }
+        return $this->redirectToRoute('event-list');
     }
 }

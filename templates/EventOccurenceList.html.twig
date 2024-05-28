@@ -4,7 +4,19 @@
 <a class="btn btn-outline-dark position-absolute top-0 start-0 mt-2 ms-2" href="{{path('app_index')}}" role="button"><i class="bi bi-arrow-return-left"></i> &nbsp; Back</a>
     {% if is_granted('ROLE_ALLEVENTS') %}
         <div class="d-flex justify-content-center mb-4">
-            <a class="btn btn-success" href="{{ path('new_place') }}">Add new place</a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-success me-2" href="{{ path('new_place') }}">Add new place</a>
+                <div class="btn-group" role="group">
+                    <button id="editDropdown" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Edit place
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="editDropdown">
+                        {% for event in events %}
+                            <li><a class="dropdown-item" href="{{ path('edit_place', {'id': event.id}) }}">{{ event.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
     {% endif %}
         <div class="row d-flex justify-content-center">

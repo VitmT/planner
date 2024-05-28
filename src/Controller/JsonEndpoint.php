@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Entity\ReccuringEvent as RecurringEvent;
 use App\Entity\ReccuringEventOccurence;
 use App\Repository\ReccuringEventOccurenceRepository;
-use App\Repository\ReccuringEventRepository;
 use DateTimeImmutable;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,14 +36,15 @@ class JsonEndpoint extends AbstractController
         if (!$result) {
             return $this->json(['error' => 'Data se nám ztratili..'], 404);
         }
-                $response = [
-                    'timestamp' => $result->getTimestamp()->format('Y-m-d H:i:s'),
-                    'duration' => $result->getDuration(),
-                    'recurringEvent' => [
-                        'name' => $result->getReccuringEvent()->getName(),
-                        'note' => $result->getNote(),
-                    ]
-                ];
+
+        $response = [
+            'timestamp' => $result->getTimestamp()->format('Y-m-d H:i:s'),
+            'duration' => $result->getDuration(),
+            'recurringEvent' => [
+                'name' => $result->getReccuringEvent()->getName(),
+                'note' => $result->getNote(),
+            ]
+        ];
 
         return $this->json($response);
     }
